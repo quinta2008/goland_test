@@ -1,0 +1,7 @@
+
+/3rd_library/pkg
+/3rd_library/pkg
+/3rd_library/pkg/mod
+/3rd_library/pkg/mod/github.com/cloudwego
+/3rd_library/pkg/mod/github.com
+3rd_library/pkg/mod/github.com/ugorji/go/codec@v1.2.12/go.mod

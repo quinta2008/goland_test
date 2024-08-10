@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	_ "github.com/emicklei/go-restful"
+	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"net/http"
@@ -64,16 +65,29 @@ func loadRouter() {
 	http.HandleFunc("/users/create", createUserHandler)
 }
 
-func initHttpEngine() error {
-	// 服务器端口
-	port := ":8080"
-
-	// 启动 HTTP 服务器
-	log.Printf("Starting server on http://localhost%v\n", port)
-	err := http.ListenAndServe(port, nil)
-	if err != nil {
-		log.Fatalf("ListenAndServe: %v", err)
+func CallbackHandler(c *gin.Context) {
+	// 从上下文中获取自定义参数
+	customParam, exists := c.Get("custom_param")
+	if !exists {
+		customParam = "default_value"
 	}
+
+	// 处理请求
+	c.JSON(http.StatusOK, gin.H{
+		"message":      "Callback received",
+		"custom_param": customParam,
+		"query_param":  c.Query("param"),
+	})
+}
+
+func initHttpEngine() error {
+	r := gin.Default()
+
+	// 注册回调处理函数
+	r.POST("/callback", CallbackHandler)
+
+	// 启动HTTP服务器
+	err := r.Run(":8080") // 监听并在 0.0.0.0:8080 启动服务
 	return err
 }
 
