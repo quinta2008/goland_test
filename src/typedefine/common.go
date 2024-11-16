@@ -1,15 +1,4 @@
-package main
-
-type HttpErrRsp struct {
-	Code    int    `json:"code"`
-	Message string `json:"message"`
-}
-
-type HttpSucRsp struct {
-	Code    int         `json:"code"`
-	Message string      `json:"message"`
-	Data    interface{} `json:"data"`
-}
+package typedefine
 
 func ResponseHttpErrRsp(message string) HttpErrRsp {
 	httpRsp := HttpErrRsp{}

@@ -5,3 +5,5 @@
 /3rd_library/pkg/mod/github.com/cloudwego
 /3rd_library/pkg/mod/github.com
 *.mod
+/3rd_library
+/3rd_library/cache
